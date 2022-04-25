@@ -1,5 +1,9 @@
 <<<<<<< HEAD
-hi, i'm second-year student at MIPT.
+<<<<<<< HEAD
+Hi, i'm second-year student at MIPT.
+=======
+Hi, i'm second-year student at MIPT.
+>>>>>>> branch_new
 =======
 Hi, i'm second-year student at MIPT.
 >>>>>>> branch_new
