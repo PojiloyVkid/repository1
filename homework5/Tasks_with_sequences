@@ -1,0 +1,209 @@
+#include <iostream>
+#include <random>
+#include "algorithm"
+#include "set"
+
+using namespace std;
+
+double getRandomFloatingPointBetween_progressive(int min, int max) {
+    std::random_device rd;     // uniformly-distributed integer random number generator
+    std::mt19937 gen(rd());    //инициализируем Вихрь Мерсенна случайным стартовым числом
+    std::uniform_real_distribution<> dis(min, max);//uniform distribution between min and max
+    return dis(gen);
+}
+
+
+
+
+
+int main() {
+
+    vector<int> seq{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    
+    for (auto x : seq) 
+    {
+        cout << x << ' ';
+    }
+    cout << endl;
+
+    //Добавление нескольких элементов
+    
+    cout << "Добавление 5 элементов" << endl;
+    for (int i = 0; i < 5; ++i) 
+    {
+        int j;
+        cin >> j;
+        seq.push_back(j);
+    }
+
+    for (auto x : seq) 
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    random_shuffle(seq.begin(), seq.end()); //Перемешиваем случайным образом
+
+    for (auto x : seq)
+    {
+        cout << x << " ";
+    }
+    std::cout << endl;
+
+    set<int> st;
+    for (auto x : seq)
+    {
+        st.insert(x);
+    }
+
+    seq.clear();
+    for (auto x : st)
+    {
+        seq.push_back(x); //Удаление повторяющихся элементов
+    }
+   
+
+    for (auto x : seq) 
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+
+
+    cout << "Количество нечетных элементов: " << count_if(seq.begin(), seq.end(), [](int k)
+        { return (k % 2 != 0); }) << endl; 
+
+    cout << "Максимальный элемент последовательности: " << *std::max_element(seq.begin(), seq.end()) << endl;
+    cout << "Минимальный элемент последовательности: " << *std::min_element(seq.begin(), seq.end()) << endl;
+
+    // Поиск простого числа
+    for (int x : seq) 
+    {
+        if (x == 1) continue;
+        if (x == 3)
+        {
+            cout << "Простое чило: " << x << endl;
+        }
+        if (x * x % 24 == 1)
+        {
+            cout << "Простое число: " << x << endl;
+        }
+    }
+
+
+
+    //Замена всех чисел их квадратами
+    
+    for (auto it = seq.begin(); it != seq.end(); ++it)
+    {
+        *it = (*it) * (*it);
+    }
+    
+    cout << "Квадраты чисел: ";
+    
+    for (auto x : seq)
+    {
+        cout << x << " ";
+    }
+    
+    cout << endl;
+
+    vector<int> seq2;
+    
+    for (int i = 0; i < seq.size(); ++i) 
+    {
+        int a = getRandomFloatingPointBetween_progressive(-100, 100);
+        seq2.push_back(a);
+        cout << a << " ";
+    }
+    cout << " Вторая последовательность" << endl;
+
+    int sum = 0;
+
+    for (int x = 0; x < seq2.size(); ++x)
+    {
+        sum += seq2[x];
+    }
+    cout << "Сумма элементов второй последовательности = " << sum << endl;
+
+
+    for (auto x : seq2) 
+    {
+        cout << x << " ";
+    }
+    std::cout << endl;
+    
+    seq2[0] = 1;
+    seq2[1] = 1;
+    seq2.resize(seq.size());
+
+    for (auto x : seq2) 
+    {
+        cout << x << " ";
+    }
+
+    vector<int> seq3(seq2.size());
+
+    for (int i = 0; i < seq.size(); ++i) 
+    {
+        seq3[i] = seq[i] - seq2[i];
+    }
+
+    for (auto x : seq3) 
+    {
+        cout << x << " ";
+    }
+    cout << "Разность последовательностей 1 и 2" << endl;
+
+    for (auto x = seq3.begin(); x < seq3.end(); ++x) 
+    {
+        if (*x < 0) *x = 0;
+        if (*x == 0) seq3.erase(x);
+    }
+
+    for (auto x : seq3) 
+    {
+        cout << x << " ";
+    }
+    cout << " Удаляем нулевые элементы" << endl;
+
+    reverse(seq3.begin(), seq3.end());
+    for (auto x : seq3) 
+    {
+        cout << x << " ";
+    }
+    cout << " Изменяем порядок 3 последовательности на обратный" << endl;
+
+    sort(seq3.rbegin(), seq3.rend());
+    for (int x = 0; x < 3; ++x) 
+    {
+        cout << seq3[x] << " ";
+    }
+    cout << "Топ 3 наибольших элемента третьей последовательности " << endl;
+
+    sort(seq.begin(), seq.end());
+    for (auto x : seq3) 
+    {
+        cout << x << " ";
+    }
+    cout << " Отсортированная третья последовательность" << endl;
+
+    sort(seq2.begin(), seq2.end());
+    for (auto x : seq3) 
+    {
+        cout << x << " ";
+    }
+    cout << " Отсортированная вторая последовательность " << endl;
+
+    vector<int> seq4 = seq;
+    seq4.insert(seq4.end(), seq2.begin(), seq2.end());
+
+    for (auto x : seq4) 
+    {
+        cout << x << " ";
+    }
+    cout << " Слияние первой и второй послдовательностей" << endl;
+   
+
+    return 0;
+}
